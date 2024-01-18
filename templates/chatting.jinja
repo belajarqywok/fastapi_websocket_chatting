@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FastAPI WebSocket</title>
+        <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    </head>
+    
+    <body>
+        <h1>FastAPI WebSocket</h1>
+        <div>
+            <input type="text" id="messageInput" placeholder="Type a message">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <div id="output"></div>
+        <script src="{{ url_for('static', path='/scripts.js') }}"></script>
+    </body>
+</html>
