@@ -1,6 +1,6 @@
 const userId = prompt("enter your user ID (e.g., user1, user2):");
 
-const ws = new WebSocket(`ws://localhost:8000/ws/${userId}`);
+const ws = new WebSocket(`wss://192.168.137.1/ws/${userId}`);
 const outputDiv = document.getElementById("output");
 
 ws.onmessage = function (event) {

@@ -10,3 +10,7 @@ prod:
 requirements:
 	poetry export --without-hashes --format=requirements.txt > requirements.txt
 	
+cert_gen:
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout F:\command\nginx\conf\private.key -out F:\command\nginx\conf\certs.crt
+	openssl dhparam -out F:\command\nginx\conf\dhparam.pem 2048
+	
