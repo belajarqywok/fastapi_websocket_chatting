@@ -1,3 +1,6 @@
+NGINX_PATH = F:\command\nginx\conf
+HAPROXY_PATH = F:\command\haproxy
+
 shell:
 	poetry shell
 
@@ -10,7 +13,12 @@ prod:
 requirements:
 	poetry export --without-hashes --format=requirements.txt > requirements.txt
 	
+# openssl x509 -req -sha256 -days 365 -in $(NGINX_PATH)/certs.crt -signkey $(NGINX_PATH)/private.key -out $(NGINX_PATH)/certs.pem
 cert_gen:
-	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout F:\command\nginx\conf\private.key -out F:\command\nginx\conf\certs.crt
-	openssl dhparam -out F:\command\nginx\conf\dhparam.pem 2048
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $(NGINX_PATH)\private.key -out $(NGINX_PATH)\certs.crt
+	openssl dhparam -out $(NGINX_PATH)\dhparam.pem 2048
 	
+	cat $(NGINX_PATH)\certs.crt $(NGINX_PATH)\private.key > $(HAPROXY_PATH)\certificates.pem
+
+haproxy:
+	haproxy -f ./haproxy/haproxy.cfg
